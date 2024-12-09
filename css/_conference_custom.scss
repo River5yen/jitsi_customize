@@ -1,0 +1,50 @@
+/** Insert custom CSS for any additional content in the conference page **/
+
+.header-a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    background: #463500 no-repeat padding-box;
+    gap: 17px;
+
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .logo {
+        margin-left: 15px;
+        width: 108px;
+        height: 28px;
+    }
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .icon {
+        width: 23px;
+        height: 23px;
+        background: #FFFFFF1A no-repeat padding-box;
+        border-radius: 2px;
+    }
+}
+
+
+.conference-custom {
+    &__timer {
+        border: 1px solid #D81214;
+        border-radius: 4px;
+        width: 86px;
+        height: 26px;
+        text-align: center;
+        align-content: center;
+    }
+    
+}

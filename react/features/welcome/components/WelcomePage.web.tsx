@@ -203,13 +203,13 @@ class WelcomePage extends AbstractWelcomePage<IProps> {
                 <div className = 'header'>
                     <div className = 'header-image' />
                     <div className = 'header-container'>
-                        <div className = 'header-watermark-container'>
+                        {/* <div className = 'header-watermark-container'>
                             <div className = 'welcome-watermark'>
                                 <Watermarks
                                     defaultJitsiLogoURL = { DEFAULT_WELCOME_PAGE_LOGO_URL }
                                     noMargins = { true } />
                             </div>
-                        </div>
+                        </div> */}
                         <div className = 'welcome-page-settings'>
                             <SettingsButton
                                 defaultTab = { SETTINGS_TABS.CALENDAR }

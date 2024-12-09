@@ -23,7 +23,7 @@
 
         @extend %align-right;
         align-items: flex-end;
-        bottom: 0;
+        bottom: 5px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column-reverse;
@@ -75,7 +75,7 @@
          */
         #filmstripLocalVideo {
             align-self: initial;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             display: flex;
             flex-direction: column-reverse;
             height: auto;

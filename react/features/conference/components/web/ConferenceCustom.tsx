@@ -27,7 +27,7 @@ import ReactionAnimations from '../../../reactions/components/web/ReactionsAnima
 import { toggleToolboxVisible } from '../../../toolbox/actions.any';
 import { fullScreenChanged, showToolbox } from '../../../toolbox/actions.web';
 import JitsiPortal from '../../../toolbox/components/web/JitsiPortal';
-import Toolbox from '../../../toolbox/components/web/Toolbox';
+import ToolboxCustom from '../../../toolbox/components/web/ToolboxCustom';
 import { LAYOUT_CLASSNAMES } from '../../../video-layout/constants';
 import { getCurrentLayout } from '../../../video-layout/functions.any';
 import VisitorsQueue from '../../../visitors/components/web/VisitorsQueue';
@@ -42,7 +42,8 @@ import type { AbstractProps } from '../AbstractConference';
 
 import ConferenceInfo from './ConferenceInfo';
 import { default as Notice } from './Notice';
-import ConferenceCustom from './ConferenceCustom';
+import ConferenceInfoCustom from './ConferenceInfoCustom';
+import ConferenceInfoCustomRight from './ConferenceInfoCustomRight';
 
 /**
  * DOM events for when full screen mode has changed. Different browsers need
@@ -58,7 +59,7 @@ const FULL_SCREEN_EVENTS = [
 ];
 
 /**
- * The type of the React {@code Component} props of {@link Conference}.
+ * The type of the React {@code Component} props of {@link ConferenceCustom}.
  */
 interface IProps extends AbstractProps, WithTranslation {
 
@@ -73,7 +74,7 @@ interface IProps extends AbstractProps, WithTranslation {
     _isAnyOverlayVisible: boolean;
 
     /**
-     * The CSS class to apply to the root of {@link Conference} to modify the
+     * The CSS class to apply to the root of {@link ConferenceCustom} to modify the
      * application layout.
      */
     _layoutClassName: string;
@@ -126,7 +127,7 @@ function shouldShowPrejoin({ _showPrejoin, _showVisitorsQueue }: IProps) {
 /**
  * The conference page of the Web application.
  */
-class Conference extends AbstractConference<IProps, any> {
+class ConferenceCustom extends AbstractConference<IProps, any> {
     _originalOnMouseMove: Function;
     _originalOnShowToolbar: Function;
 
@@ -212,6 +213,7 @@ class Conference extends AbstractConference<IProps, any> {
         APP.conference.isJoined() && this.props.dispatch(hangup());
     }
 
+
     /**
      * Implements React's {@link Component#render()}.
      *
@@ -227,65 +229,93 @@ class Conference extends AbstractConference<IProps, any> {
             _showLobby,
             _showPrejoin,
             _showVisitorsQueue,
-            t
+            t,
         } = this.props;
 
         return (
-            <div
-                id = 'layout_wrapper'
-                onMouseEnter = { this._onMouseEnter }
-                onMouseLeave = { this._onMouseLeave }
-                onMouseMove = { this._onMouseMove }
-                ref = { this._setBackground }>
-                <Chat />
-                <div
-                    className = { _layoutClassName }
-                    id = 'videoconference_page'
-                    onMouseMove = { isMobileBrowser() ? undefined : this._onShowToolbar }>
-                    <ConferenceInfo />
-                    <Notice />
-                    <div
-                        id = 'videospace'
-                        onTouchStart = { this._onVidespaceTouchStart }>
-                        <LargeVideo />
+
+            <>
+                <div className='header-a'>
+                    <div className='left-section'>
+                        <div className='logo'>
+                            <img
+                                alt='Brand logo'
+                                src={config.defaultLogoUrl}
+                            />
+                        </div>
+
                         {
-                            _showPrejoin || _showLobby || (<>
-                                <StageFilmstrip />
-                                <ScreenshareFilmstrip />
-                                <MainFilmstrip />
-                            </>)
+                            _showPrejoin || _showLobby || (
+                                <ConferenceInfoCustom />
+                            )
                         }
                     </div>
+                    {
+                        _showPrejoin || _showLobby || (<>
 
-                    { _showPrejoin || _showLobby || (
-                        <>
-                            <span
-                                aria-level = { 1 }
-                                className = 'sr-only'
-                                role = 'heading'>
-                                { t('toolbar.accessibilityLabel.heading') }
-                            </span>
-                            <Toolbox />
-                        </>
-                    )}
+                            <div className="right-section">
+                                <ConferenceInfoCustomRight />
+                            </div>
 
-                    {_notificationsVisible && !_isAnyOverlayVisible && (_overflowDrawer
-                        ? <JitsiPortal className = 'notification-portal'>
-                            {this.renderNotificationsContainer({ portal: true })}
-                        </JitsiPortal>
-                        : this.renderNotificationsContainer())
+                        </>)
                     }
-
-                    <CalleeInfoContainer />
-
-                    { shouldShowPrejoin(this.props) && <Prejoin />}
-                    { (_showLobby && !_showVisitorsQueue) && <LobbyScreen />}
-                    { _showVisitorsQueue && <VisitorsQueue />}
                 </div>
-                <ParticipantsPane />
-                <ReactionAnimations />
-            </div>
-        );
+                <div
+                    id='layout_wrapper'
+                    onMouseEnter={this._onMouseEnter}
+                    onMouseLeave={this._onMouseLeave}
+                    onMouseMove={this._onMouseMove}
+                    ref={this._setBackground}>
+
+                    <Chat />
+                    <div
+                        className={_layoutClassName}
+                        id='videoconference_page'
+                        onMouseMove={isMobileBrowser() ? undefined : this._onShowToolbar}>
+                       
+                        <Notice />
+                        <div
+                            id='videospace'
+                            onTouchStart={this._onVidespaceTouchStart}>
+                            <LargeVideo />
+                            {
+                                _showPrejoin || _showLobby || (<>
+                                    <StageFilmstrip />
+                                    <ScreenshareFilmstrip />
+                                    <MainFilmstrip />
+                                </>)
+                            }
+                        </div>
+
+                        {_showPrejoin || _showLobby || (
+                            <>
+                                <span
+                                    aria-level={1}
+                                    className='sr-only'
+                                    role='heading'>
+                                    {t('toolbar.accessibilityLabel.heading')}
+                                </span>
+                                <ToolboxCustom />
+                            </>
+                        )}
+
+                        {_notificationsVisible && !_isAnyOverlayVisible && (_overflowDrawer
+                            ? <JitsiPortal className='notification-portal'>
+                                {this.renderNotificationsContainer({ portal: true })}
+                            </JitsiPortal>
+                            : this.renderNotificationsContainer())
+                        }
+
+                        <CalleeInfoContainer />
+
+                        {shouldShowPrejoin(this.props) && <Prejoin />}
+                        {(_showLobby && !_showVisitorsQueue) && <LobbyScreen />}
+                        {_showVisitorsQueue && <VisitorsQueue />}
+                    </div>
+                    <ParticipantsPane />
+                    <ReactionAnimations />
+                </div>
+            </>);
     }
 
     /**

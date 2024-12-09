@@ -1,6 +1,6 @@
 import { IReduxState } from '../../app/types';
 
-import { CONFERENCE_INFO } from './constants';
+import { CONFERENCE_INFO, CONFERENCE_INFO_CUSTOM } from './constants';
 
 /**
  * Retrieves the conference info labels based on config values and defaults.
@@ -13,8 +13,8 @@ export const getConferenceInfo = (state: IReduxState) => {
 
     if (conferenceInfo) {
         return {
-            alwaysVisible: conferenceInfo.alwaysVisible ?? CONFERENCE_INFO.alwaysVisible,
-            autoHide: conferenceInfo.autoHide ?? CONFERENCE_INFO.autoHide
+            alwaysVisible: conferenceInfo.alwaysVisible ?? CONFERENCE_INFO_CUSTOM.alwaysVisible,
+            autoHide: conferenceInfo.autoHide ?? CONFERENCE_INFO_CUSTOM.autoHide
         };
     }
 

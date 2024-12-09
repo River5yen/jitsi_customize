@@ -3,6 +3,37 @@ import { ToolbarButton } from './types';
 /**
  * Thresholds for displaying toolbox buttons.
  */
+// export const THRESHOLDS = [
+//     {
+//         width: 565,
+//         order: [ 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'reactions', 'participants-pane', 'tileview' ]
+//     },
+//     {
+//         width: 520,
+//         order: [ 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'participants-pane', 'tileview' ]
+//     },
+//     {
+//         width: 470,
+//         order: [ 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'participants-pane' ]
+//     },
+//     {
+//         width: 420,
+//         order: [ 'microphone', 'camera', 'desktop', 'chat', 'participants-pane' ]
+//     },
+//     {
+//         width: 370,
+//         order: [ 'microphone', 'camera', 'chat', 'participants-pane' ]
+//     },
+//     {
+//         width: 225,
+//         order: [ 'microphone', 'camera', 'chat' ]
+//     },
+//     {
+//         width: 200,
+//         order: [ 'microphone', 'camera' ]
+//     }
+// ];
+
 export const THRESHOLDS = [
     {
         width: 565,
